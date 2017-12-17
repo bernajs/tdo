@@ -1,0 +1,79 @@
+@import '~antd/dist/antd.css';
+
+.main {
+  height: 100vh !important;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  right: 10px;
+  top: 20px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 0 0 0;
+  font-size: 1.5em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0px;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Menu item */
+.menu-item {
+  color: #aaabad;
+  padding: 5px;
+  padding-left: 2em;
+}
+
+.menu-item.active {
+  color: #1890ff;
+}
+
+/* Card producto */
+
+.ant-card-meta-title {
+  text-overflow: ellipsis;
+
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Spinner */
+.ant-spin-nested-loading {
+  background-color: #50505073;
+}
