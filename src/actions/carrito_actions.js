@@ -2,7 +2,8 @@ import {
   AGREGAR_PRODUCTO,
   ELIMINAR_PRODUCTO,
   RESTAR_PRODUCTO,
-  VACIAR_CARRITO
+  VACIAR_CARRITO,
+  REHYDRATE
 } from './types'
 
 export const agregarProducto = producto => dispatch => {
@@ -19,4 +20,8 @@ export const eliminarProducto = producto => dispatch => {
 
 export const vaciarCarrito = producto => dispatch => {
   dispatch({ type: VACIAR_CARRITO })
+}
+
+export const rehydrate = () => dispatch => {
+  dispatch({ type: REHYDRATE })
 }

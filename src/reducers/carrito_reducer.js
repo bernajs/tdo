@@ -4,10 +4,11 @@ import {
   RESTAR_PRODUCTO,
   VACIAR_CARRITO
 } from '../actions/types'
+import { REHYDRATE } from 'redux-persist'
 import _ from 'lodash'
 let producto
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case AGREGAR_PRODUCTO:
       producto = _.findKey(state, item => item.id === action.payload.id)
@@ -42,6 +43,12 @@ export default function(state = [], action) {
     case ELIMINAR_PRODUCTO:
       delete state[action.payload.id]
       return { ...state }
+    case REHYDRATE:
+      console.log(action)
+      if (action.payload) {
+        return action.payload.carrito
+      }
+      return {}
     case VACIAR_CARRITO:
       return []
     default:

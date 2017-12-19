@@ -5,15 +5,17 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './store'
-
+import { persistor, store } from './store'
+import { PersistGate } from 'redux-persist/es/integration/react'
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <div>
-        <App />
-      </div>
-    </BrowserRouter>
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
+        <div>
+          <App />
+        </div>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 )

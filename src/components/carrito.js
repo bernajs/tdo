@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 class Carrito extends Component {
   render() {
-    console.log(this.props.carrito)
     return (
       //   <Affix offsetTop={120} onChange={affixed => console.log(affixed)}>
       <Link to="/carrito">

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.0.1",
+    "localforage": "^1.5.5",
     "lodash": "^4.17.4",
     "react": "^16.2.0",
     "react-burger-menu": "^2.1.11",

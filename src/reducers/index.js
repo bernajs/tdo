@@ -4,4 +4,4 @@ import productos from './productos_reducer'
 import general from './general_reducer'
 import carrito from './carrito_reducer'
 
-export default combineReducers({ carrito, categorias, general, productos })
+export default { carrito, categorias, general, productos }
