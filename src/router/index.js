@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Producto, Categoria, Categorias, Inicio } from '../views'
+import { Producto, Categoria, Categorias, Inicio, Carrito } from '../views'
 
 export default class Routes extends Component {
   render() {
@@ -8,8 +8,9 @@ export default class Routes extends Component {
       <div>
         <Switch>
           <Route path="/producto/:id" component={Producto} />
-          <Route path="/categoria/:id" component={Categoria} exact />
+          <Route path="/categoria/:id" component={Categoria} />
           <Route path="/categorias" component={Categorias} />
+          <Route path="/carrito" component={Carrito} />
           <Route path="/" component={Inicio} />
         </Switch>
       </div>

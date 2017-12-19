@@ -20,5 +20,8 @@ export const getProductosDestacados = () => async dispatch => {
 export const getProductosPorCategoria = categoria => async dispatch => {
   const data = await WooCommerce.getAsync(`products?category=${categoria}`)
   const result = JSON.parse(data.toJSON().body)
-  dispatch({ type: GET_PRODUCTOS_POR_CATEGORIA, payload: result })
+  dispatch({
+    type: GET_PRODUCTOS_POR_CATEGORIA,
+    payload: { id: categoria, data: result }
+  })
 }

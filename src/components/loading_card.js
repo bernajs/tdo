@@ -8,13 +8,7 @@ export default class LoadingCard extends Component {
   }
 
   renderCard() {
-    const cards = [
-      { title: '1' },
-      { title: '1' },
-      { title: '1' },
-      { title: '1' }
-    ]
-    
+    const cards = new Array(this.props.cantidad).fill(1)
     return cards.map((i, key) => {
       return (
         <Card

@@ -9,17 +9,22 @@ class Producto extends Component {
   }
 
   render() {
+    let isProducto = false
     if (Object.keys(this.props.seleccionado).length === 0) {
-      return <LoadingCard />
+      isProducto = false
+    } else if (
+      Number(this.props.match.params.id) === Number(this.props.seleccionado.id)
+    ) {
+      isProducto = true
     }
-    console.log(this.props.seleccionado)
-    return (
+
+    return !isProducto ? (
+      <LoadingCard cantidad={1} />
+    ) : (
       <div>
         <ProductoComponent
           id={this.props.match.params.id}
-          nombre={this.props.seleccionado.name}
-          imagen={this.props.seleccionado.images[0].src}
-          descripcion={this.props.seleccionado.description}
+          producto={this.props.seleccionado}
         />
       </div>
     )

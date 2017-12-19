@@ -16,22 +16,13 @@ class Inicio extends Component {
 
   renderProducto() {
     return this.props.productos.destacados.map((producto, key) => {
-      return (
-        <Producto
-          id={producto.id}
-          nombre={producto.name}
-          precio={producto.precio}
-          imagen={producto.images[0].src}
-          descirpcion={producto.descripcion}
-          key={key}
-        />
-      )
+      return <Producto producto={producto} link key={key} />
     })
   }
 
   render() {
     if (this.props.productos.destacados.length <= 0) {
-      return <LoadingCard />
+      return <LoadingCard cantidad={5} />
     }
     console.log(this.props.productos)
 
