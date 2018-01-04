@@ -47,23 +47,6 @@ class Categoria extends Component {
         </div>
       )
     }
-    // console.log(this.props.productos.categoria)
-    // let isCategoria = false
-    // if (this.props.productos.categoria.length === 0) {
-    //   isCategoria = false
-    // } else if (
-    //   Number(this.props.match.params.id) ===
-    //   Number(this.props.productos.categoria.id)
-    // ) {
-    //   isCategoria = true
-    // }
-
-    // return !isCategoria ? (
-    //   <LoadingCard cantidad={5} />
-    // ) : (
-    //   <div>{this.renderProductos()}</div>
-    // )
-    // this.props.toggleLoading(false)
     return <div>{this.renderProductos()}</div>
   }
 }

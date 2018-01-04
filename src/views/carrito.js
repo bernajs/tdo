@@ -2,26 +2,64 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
-import { Button, Icon, message, Steps } from 'antd'
+import {
+  Button,
+  List,
+  Form,
+  Icon,
+  Input,
+  Layout,
+  message,
+  Steps,
+  Row,
+  Col
+} from 'antd'
 import { LoadingCard, CarritoItem } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
 const { Step } = Steps
+const { Footer } = Layout
 
 class Carrito extends Component {
   constructor(props) {
     super(props)
     this.renderProductos = this.renderProductos.bind(this)
     this.enviarPedido = this.enviarPedido.bind(this)
-    this.state = { paso: 0, status: 'to-top', total: 0 }
+    this.atras = this.atras.bind(this)
+    this.siguiente = this.siguiente.bind(this)
+    this.state = {
+      paso: 0,
+      status: 'to-top',
+      total: 0,
+      billing: {
+        first_name: 'John',
+        last_name: 'Doe',
+        address_1: '969 Market',
+        address_2: '',
+        city: 'San Francisco',
+        state: 'CA',
+        postcode: '94103',
+        country: 'US',
+        email: 'luisg@mobkii.com',
+        phone: '(555) 555-5555'
+      },
+      shipping: {
+        first_name: 'John',
+        last_name: 'Doe',
+        address_1: '969 Market',
+        address_2: '',
+        city: 'San Francisco',
+        state: 'CA',
+        postcode: '94103',
+        country: 'US'
+      }
+    }
   }
 
   componentDidMount() {
-    this.setState({ paso: Number(this.props.match.params.paso) })
     this.getTotal(this.props.carrito)
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ paso: Number(newProps.match.params.paso) })
     this.getTotal(newProps.carrito)
   }
 
@@ -54,35 +92,14 @@ class Carrito extends Component {
       })
     }
     const pedido = {
-      billing: {
-        first_name: 'John',
-        last_name: 'Doe',
-        address_1: '969 Market',
-        address_2: '',
-        city: 'San Francisco',
-        state: 'CA',
-        postcode: '94103',
-        country: 'US',
-        email: 'luisg@mobkii.com',
-        phone: '(555) 555-5555'
-      },
-      shipping: {
-        first_name: 'John',
-        last_name: 'Doe',
-        address_1: '969 Market',
-        address_2: '',
-        city: 'San Francisco',
-        state: 'CA',
-        postcode: '94103',
-        country: 'US'
-      },
+      billing: this.state.billing,
+      shipping: this.state.shipping,
       line_items: productos
     }
     this.setState({ status: 'loading' })
     const result = await this.props.enviarPedido(pedido)
     if (result) {
       const body = JSON.parse(result.body)
-      console.log(body)
       this.setState({ status: 'check-circle' })
       this.props.vaciarCarrito()
       message.success(`Tu pedido se ha creado con el id #${body.id}`, 10, () =>
@@ -91,49 +108,93 @@ class Carrito extends Component {
     }
   }
 
-  goToUrl(paso) {
-    this.props.history.push(`/carrito/${paso}`)
+  renderUsuarioInfo() {
+    const { shipping } = this.state
+    return (
+      <div>
+        <Form.Item label="Nombre:">
+          <Input
+            defaultValue={`${shipping.first_name} ${shipping.last_name}`}
+          />
+        </Form.Item>
+        <Form.Item label="Dirección:">
+          <Input defaultValue={shipping.address_1} />
+        </Form.Item>
+        <Form.Item label="Ciudad:">
+          <Input defaultValue={shipping.city} />
+        </Form.Item>
+        <Form.Item label="Estado:">
+          <Input defaultValue={shipping.state} />
+        </Form.Item>
+        <Form.Item label="Código postal:">
+          <Input defaultValue={shipping.postcode} />
+        </Form.Item>
+      </div>
+    )
+  }
+
+  siguiente() {
+    let { paso } = this.state
+    paso < 2 && this.setState({ paso: paso + 1 })
+  }
+
+  atras() {
+    let { paso } = this.state
+    paso > 0 && this.setState({ paso: paso - 1 })
   }
 
   render() {
     if (Object.keys(this.props.carrito).length > 0) {
       return (
         <div>
-          <h4>Total: $ {this.state.total}</h4>
-          <Steps current={this.state.paso}>
-            <Step
-              onClick={this.goToUrl.bind(this, 0)}
-              title="Productos"
-              icon={<Icon type="schedule" />}
-            />
-            <Step
-              onClick={this.goToUrl.bind(this, 1)}
-              title="Billing"
-              icon={<Icon type="solution" />}
-            />
-            <Step
-              onClick={this.goToUrl.bind(this, 2)}
-              title="Terminar pedido"
-              icon={<Icon type="smile-o" />}
-            />
-          </Steps>
-          <div>
+          <div className="carrito-container">
             {this.state.paso === 0 && this.renderProductos()}
             {this.state.paso === 1 && (
-              <div>Aqui va la información del billinf</div>
+              <div>Aqui va la información del billing</div>
             )}
             {this.state.paso === 2 && (
               <div>
-                <Button
-                  type="primary"
-                  icon={this.state.status}
-                  onClick={this.enviarPedido}
-                >
-                  Enviar pedido
-                </Button>
+                <Form>{this.renderUsuarioInfo()}</Form>
               </div>
             )}
           </div>
+          <Footer className="carrito-footer">
+            <Row type="flex" justify="space-around" align="middle">
+              <Col span={24} className="carrito-precio-col">
+                <h1 className="carrito-precio">Total: ${this.state.total}</h1>
+              </Col>
+              <Col span={24}>
+                <Button.Group size="large" className="carrito-grupo-de-botones">
+                  <Button
+                    onClick={this.atras}
+                    disabled={this.state.paso === 0 && true}
+                    type="primary"
+                    className="carrito-atras-siguiente-btn"
+                  >
+                    <Icon type="left" />Atrás
+                  </Button>
+                  {this.state.paso < 2 ? (
+                    <Button
+                      onClick={this.siguiente}
+                      type="primary"
+                      className="carrito-atras-siguiente-btn"
+                    >
+                      Siguiente<Icon type="right" />
+                    </Button>
+                  ) : (
+                    <Button
+                      type="primary"
+                      icon={this.state.status}
+                      onClick={this.enviarPedido}
+                      className="carrito-atras-siguiente-btn"
+                    >
+                      Enviar pedido
+                    </Button>
+                  )}
+                </Button.Group>
+              </Col>
+            </Row>
+          </Footer>
         </div>
       )
     }

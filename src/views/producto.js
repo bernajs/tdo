@@ -105,6 +105,7 @@ class Producto extends Component {
           </Col>
           <Col span={24}>
             <p>{producto.description}</p>
+            <hr />
           </Col>
           <Col span={24}>
             <h4>Categorías:</h4>

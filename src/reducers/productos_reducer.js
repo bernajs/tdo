@@ -28,7 +28,6 @@ export default function(state = INITIAL_STATE, action) {
     case GET_PRODUCTOS:
       return { ...state, data: action.payload }
     case GET_PRODUCTO:
-      console.log(action.payload)
       return {
         ...state,
         seleccionado: action.payload.producto,
