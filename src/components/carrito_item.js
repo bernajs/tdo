@@ -38,7 +38,7 @@ class CarritoItem extends Component {
   render() {
     return (
       <Card
-        style={{ width: '100%' }}
+        style={{ width: '100%', marginTop: 10 }}
         actions={[
           <Icon
             type="plus"
@@ -71,17 +71,23 @@ class CarritoItem extends Component {
           </Popconfirm>
         ]}
       >
-        <Meta
-          avatar={
-            <Avatar
-              src={this.props.producto.images[0].src}
-              shape="square"
-              size="large"
-            />
-          }
-          title={this.props.producto.name}
-          description={`Cantidad: ${this.props.producto.cantidad}`}
-        />
+        <Link to={`/producto/${this.props.producto.id}`}>
+          <Meta
+            avatar={
+              <Avatar
+                src={this.props.producto.images[0].src}
+                shape="square"
+                size="large"
+              />
+            }
+            title={this.props.producto.name}
+            description={`Cantidad: ${this.props.producto.cantidad} x $${Number(
+              this.props.producto.price
+            )
+              .toFixed(2)
+              .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}`}
+          />
+        </Link>
       </Card>
     )
   }

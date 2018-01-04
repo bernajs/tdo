@@ -15,7 +15,6 @@ class App extends Component {
   //   />
   // </div>
   render() {
-    console.log(this.props)
     return (
       <div>
         <Spin tip="Cargando..." spinning={this.props.general.isLoading}>
@@ -30,10 +29,18 @@ class App extends Component {
               />
             )}
             <Layout>
-              <Header style={{ background: '#fff', paddingLeft: 30 }}>
+              <Header
+                style={{
+                  background: '#fff',
+                  paddingLeft: 30,
+                  textAlign: 'center'
+                }}
+              >
                 <Carrito />
                 <Link to="/">
-                  <h2>Ant - Admin</h2>
+                  <h2 style={{ display: 'inline', textAlign: 'center' }}>
+                    TDO - Tienda
+                  </h2>
                 </Link>
               </Header>
               <Content style={{ margin: '10px' }}>
@@ -43,9 +50,6 @@ class App extends Component {
                   <Navigation />
                 </div>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©2016 Created by Ant UED
-              </Footer>
             </Layout>
           </Layout>
         </Spin>

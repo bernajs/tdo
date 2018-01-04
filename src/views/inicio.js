@@ -24,7 +24,6 @@ class Inicio extends Component {
     if (this.props.productos.destacados.length <= 0) {
       return <LoadingCard cantidad={5} />
     }
-    console.log(this.props.productos)
 
     return <div>{this.renderProducto()}</div>
   }

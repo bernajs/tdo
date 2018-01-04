@@ -11,12 +11,10 @@ class Categoria extends Component {
   }
 
   componentDidMount() {
-    console.log('did,,,')
     this.props.getProductosPorCategoria(this.props.match.params.id)
   }
 
   componentWillMount() {
-    console.log('will,,,')
     // if (
     //   this.props.productos.categoria_seleccionada !== this.props.match.params.id
     // ) {
@@ -25,7 +23,6 @@ class Categoria extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('...')
     if (this.props.match.params.id !== newProps.match.params.id) {
       // this.props.productos.categoria = []
       // this.props.toggleLoading(true)
@@ -40,7 +37,6 @@ class Categoria extends Component {
   }
 
   render() {
-    console.log(this.props)
     if (
       this.props.productos.categoria.length <= 0 ||
       this.props.productos.categoria_seleccionada !== this.props.match.params.id

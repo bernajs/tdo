@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Icon } from 'antd'
+import { Button, Card, Icon } from 'antd'
 import { connect } from 'react-redux'
 import { agregarProducto } from '../actions/carrito_actions'
 const { Meta } = Card
 
 class Producto extends Component {
-  agregarProducto(producto) {
-    producto.cantidad = 1
-    this.props.agregarProducto(producto)
-  }
+  // agregarProducto(producto) {
+  //   producto.cantidad = 1
+  //   this.props.agregarProducto(producto)
+  // }
 
   render() {
     const producto = (
@@ -22,12 +22,16 @@ class Producto extends Component {
             src={this.props.producto.images[0].src}
           />
         }
-        actions={[
-          <Icon
-            type="shopping-cart"
-            onClick={this.agregarProducto.bind(this, this.props.producto)}
-          />
-        ]}
+        // actions={[
+        //   <Button
+        //     type="normal"
+        //     icon="shopping-cart"
+        //     size="large"
+        //     onClick={this.agregarProducto.bind(this, this.props.producto)}
+        //   >
+        //     Agregar
+        //   </Button>
+        // ]}
       >
         <Meta
           title={this.props.producto.name}

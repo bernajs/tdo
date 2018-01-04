@@ -1,6 +1,8 @@
 export const GET_CATEGORIAS = 'get_categorias'
 export const GET_PRODUCTOS_DESTACADOS = 'get_productos_destacados'
 export const GET_PRODUCTOS_POR_CATEGORIA = 'get_productos_por_categoria'
+export const GET_PRODUCTOS = 'get_productos'
+export const GET_VARIACIONES = 'get_variaciones'
 export const GET_PRODUCTO = 'get_producto'
 export const SHOW_ALERT = 'show_alert'
 export const IS_LOADING = 'is_loading'

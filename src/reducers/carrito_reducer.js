@@ -4,7 +4,7 @@ import {
   RESTAR_PRODUCTO,
   VACIAR_CARRITO
 } from '../actions/types'
-import { REHYDRATE } from 'redux-persist'
+import { REHYDRATE, PURGE } from 'redux-persist'
 import _ from 'lodash'
 let producto
 
@@ -44,10 +44,11 @@ export default function(state = {}, action) {
       delete state[action.payload.id]
       return { ...state }
     case REHYDRATE:
-      console.log(action)
       if (action.payload) {
         return action.payload.carrito
       }
+      return {}
+    case PURGE:
       return {}
     case VACIAR_CARRITO:
       return []

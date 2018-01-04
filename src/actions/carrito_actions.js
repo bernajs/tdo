@@ -2,9 +2,12 @@ import {
   AGREGAR_PRODUCTO,
   ELIMINAR_PRODUCTO,
   RESTAR_PRODUCTO,
+  ENVIAR_PEDIDO,
   VACIAR_CARRITO,
   REHYDRATE
 } from './types'
+import { PURGE } from 'redux-persist'
+import WooCommerce from './woocommerce'
 
 export const agregarProducto = producto => dispatch => {
   dispatch({ type: AGREGAR_PRODUCTO, payload: producto })
@@ -24,4 +27,13 @@ export const vaciarCarrito = producto => dispatch => {
 
 export const rehydrate = () => dispatch => {
   dispatch({ type: REHYDRATE })
+}
+
+export const purgeCarrito = () => dispatch => {
+  dispatch({ type: PURGE })
+}
+
+export const enviarPedido = pedido => async dispatch => {
+  const result = await WooCommerce.postAsync('orders', pedido)
+  return result
 }

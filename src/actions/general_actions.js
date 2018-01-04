@@ -1,7 +1,6 @@
 import { IS_LOADING, SHOW_ALERT } from './types'
 
 export const toggleLoading = state => {
-  console.log(state)
   return { type: IS_LOADING, payload: state }
 }
 
