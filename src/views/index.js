@@ -3,5 +3,6 @@ import Categoria from './categoria'
 import Categorias from './categorias'
 import Inicio from './inicio'
 import Carrito from './carrito'
+import Perfil from './perfil'
 
-export { Carrito, Producto, Inicio, Categoria, Categorias }
+export { Carrito, Categoria, Categorias, Inicio, Perfil, Producto }
