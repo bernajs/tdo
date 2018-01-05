@@ -1,22 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import _ from 'lodash'
-import {
-  Button,
-  List,
-  Form,
-  Icon,
-  Input,
-  Layout,
-  message,
-  Steps,
-  Row,
-  Col
-} from 'antd'
-import { LoadingCard, CarritoItem } from '../components'
+import { Button, Form, Icon, Input, Layout, message, Row, Col } from 'antd'
+import { CarritoItem } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
-const { Step } = Steps
 const { Footer } = Layout
 
 class Carrito extends Component {

@@ -40,6 +40,7 @@ export default function(state = {}, action) {
           return { ...state }
         }
       }
+      break
     case ELIMINAR_PRODUCTO:
       delete state[action.payload.id]
       return { ...state }

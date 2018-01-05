@@ -97,7 +97,11 @@ class Producto extends Component {
             {producto.images.length > 1 ? (
               <Carousel>{this.renderImagenes()}</Carousel>
             ) : (
-              <img src={producto.images[0].src} style={{ width: '100%' }} />
+              <img
+                src={producto.images[0].src}
+                style={{ width: '100%' }}
+                alt={producto.name}
+              />
             )}
           </Col>
           <Col span={24} className="producto-nombre-col">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Affix, Avatar, Card, Badge, Button, Icon, Popconfirm } from 'antd'
+import { Avatar, Card, Icon, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import {
   agregarProducto,
@@ -18,10 +18,6 @@ const alert = {
 }
 
 class CarritoItem extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   agregarProducto(producto) {
     this.props.agregarProducto(producto)
   }

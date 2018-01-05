@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Sidebar, Carrito } from './components'
 import { connect } from 'react-redux'
 import { Alert, Layout, Spin } from 'antd'
-const { Header, Content, Footer } = Layout
+const { Header, Content } = Layout
 
 class App extends Component {
   //   <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, Icon } from 'antd'
+import { Card } from 'antd'
 import { connect } from 'react-redux'
 import { agregarProducto } from '../actions/carrito_actions'
 const { Meta } = Card

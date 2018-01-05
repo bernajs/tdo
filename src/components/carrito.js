@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Affix, Badge, Button, Icon } from 'antd'
+import { Badge, Button } from 'antd'
 import { connect } from 'react-redux'
 
 class Carrito extends Component {
