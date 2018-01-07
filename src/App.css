@@ -1,10 +1,33 @@
 @import '~antd/dist/antd.css';
 
+/* Helpers */
+.mt-20{
+  margin-top: 20px
+}
+.p20{
+  padding: 20px;
+}
+.bw {
+  background-color: white !important;
+}
+.fw {
+  width: 100% !important;
+}
+.center-text {
+  text-align: center;
+}
 .main {
   height: 100vh !important;
 }
 
 /* Position and sizing of burger button */
+.header {
+  padding-left: 0px !important;
+}
+.carrito-icon {
+  float: left;
+  margin-left: 10px;
+}
 .bm-burger-button {
   position: fixed;
   width: 20px;
@@ -172,4 +195,13 @@
   color: white;
   font-size: 22px;
   margin-top: 4.5px;
+}
+
+/* Registro */
+.registro .top-background {
+  position: fixed;
+  right: 0;
+  left: 0;
+  min-height: 250px;
+  background-color: #96d8e9 !important;
 }

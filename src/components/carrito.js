@@ -7,7 +7,7 @@ class Carrito extends Component {
   render() {
     return (
       //   <Affix offsetTop={120} onChange={affixed => console.log(affixed)}>
-      <Link to="/carrito" style={{ float: 'left' }}>
+      <Link to="/carrito" className="carrito-icon">
         <Button type="primary" shape="circle" icon="shopping-cart" className="carrito-btn">
           <Badge count={Object.keys(this.props.carrito).length} className="carrito-btn-badge" />
         </Button>
