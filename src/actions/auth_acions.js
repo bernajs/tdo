@@ -45,6 +45,7 @@ export const registro = usuario => async dispatch => {
           nombre: usuario.nombre.value,
           celular: usuario.celular.value,
           correo: usuario.correo.value,
+          contrasena: usuario.contrasena.value,
           direccion: null
         })
       user

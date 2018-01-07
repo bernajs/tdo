@@ -1,5 +1,5 @@
 import React from 'react'
-import { stack as Slider } from 'react-burger-menu'
+import { push as Slider } from 'react-burger-menu'
 import { connect } from 'react-redux'
 import { getCategorias } from '../actions/categorias_actions'
 import { Link, NavLink } from 'react-router-dom'

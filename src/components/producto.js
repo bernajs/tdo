@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Card } from 'antd'
+import { Card, Col, Divider, Row } from 'antd'
 import { connect } from 'react-redux'
 import { agregarProducto } from '../actions/carrito_actions'
 const { Meta } = Card
@@ -37,6 +37,14 @@ class Producto extends Component {
           title={this.props.producto.name}
           description={this.props.producto.description}
         />
+        <Divider />
+        <Row className="center-text">
+          <Col span={11}>Disponible</Col>
+          <Col span={2}>
+            <Divider type="vertical" />
+          </Col>
+          <Col span={11}>${this.props.producto.price}</Col>
+        </Row>
       </Card>
     )
     return this.props.link ? (

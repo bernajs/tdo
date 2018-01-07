@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { registro } from '../actions/auth_acions'
-import { Button, Col, Form, Icon, Input, Layout, message, Row } from 'antd'
+import {
+  Button,
+  Col,
+  Divider,
+  Form,
+  Icon,
+  Input,
+  Layout,
+  message,
+  Row
+} from 'antd'
 const { Item } = Form
 const { Content } = Layout
 
@@ -22,6 +31,19 @@ class PerfilForm extends Component {
     this.handleInput = this.handleInput.bind(this)
   }
 
+  componentWillMount() {
+    const { usuario } = this.props
+    this.props.usuario &&
+      this.setState({
+        uid: usuario.uid,
+        nombre: { value: usuario.nombre, label: '' },
+        celular: { value: usuario.celular, label: '' },
+        correo: { value: usuario.correo, label: '' },
+        confirmar: { value: usuario.contrasena, label: '' },
+        contrasena: { value: usuario.contrasena, label: '' }
+      })
+  }
+
   async registro() {
     if (this.state.contrasena.value !== this.state.confirmar.value) {
       message.error('Las contraseñas no coinciden')
@@ -29,6 +51,10 @@ class PerfilForm extends Component {
     }
     this.setState({ loading: true })
     const response = await this.props.action(this.state)
+    this.setState({ loading: false })
+    this.props.usuario
+      ? message.success('Perfil guardado')
+      : this.props.history.push('/')
   }
 
   handleInput(e) {
@@ -68,11 +94,7 @@ class PerfilForm extends Component {
                   <Item validateStatus={this.state.nombre.label}>
                     <Input
                       placeholder="Nombre completo"
-                      value={
-                        this.props.usuario
-                          ? this.props.usuario.nombre
-                          : this.state.nombre.value
-                      }
+                      value={this.state.nombre.value}
                       name="nombre"
                       onChange={this.handleInput}
                       prefix={
@@ -87,11 +109,7 @@ class PerfilForm extends Component {
                     <Input
                       placeholder="Celular"
                       name="celular"
-                      value={
-                        this.props.usuario
-                          ? this.props.usuario.celular
-                          : this.state.celular.value
-                      }
+                      value={this.state.celular.value}
                       onChange={this.handleInput}
                       prefix={
                         <Icon
@@ -104,11 +122,7 @@ class PerfilForm extends Component {
                   <Item validateStatus={this.state.correo.label}>
                     <Input
                       placeholder="Correo"
-                      value={
-                        this.props.usuario
-                          ? this.props.usuario.correo
-                          : this.state.correo.value
-                      }
+                      value={this.state.correo.value}
                       name="correo"
                       onChange={this.handleInput}
                       prefix={
@@ -122,11 +136,7 @@ class PerfilForm extends Component {
                   <Item validateStatus={this.state.contrasena.label}>
                     <Input
                       placeholder="Contraseña"
-                      value={
-                        this.props.usuario
-                          ? this.props.usuario.contrasena
-                          : this.state.contrasena.value
-                      }
+                      value={this.state.contrasena.value}
                       name="contrasena"
                       type="password"
                       onChange={this.handleInput}
@@ -141,11 +151,7 @@ class PerfilForm extends Component {
                   <Item validateStatus={this.state.confirmar.label}>
                     <Input
                       placeholder="Confirmar contraseña"
-                      value={
-                        this.props.usuario
-                          ? this.props.usuario.contrasena
-                          : this.state.contrasena.value
-                      }
+                      value={this.state.confirmar.value}
                       name="confirmar"
                       type="password"
                       onChange={this.handleInput}
@@ -163,11 +169,19 @@ class PerfilForm extends Component {
                 <Button
                   onClick={this.registro}
                   type="primary"
-                  icon={this.state.icon}
+                  loading={this.state.loading}
                   className="fw"
                 >
                   {this.props.titulo}
                 </Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24}>
+                <Divider />
+              </Col>
+              <Col span={24} className="center-text">
+                Cerrar sesion
               </Col>
             </Row>
           </Content>
@@ -177,4 +191,4 @@ class PerfilForm extends Component {
   }
 }
 
-export default connect(null, { registro })(PerfilForm)
+export default connect(null)(PerfilForm)
