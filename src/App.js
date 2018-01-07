@@ -16,14 +16,14 @@ class App extends Component {
 
   componentWillUpdate(props) {
     console.log('auth', this.props)
-    console.log('length', Object.keys(this.props.auth).length)
-    console.log('path', this.props.location.pathname)
+
     if (
-      Object.keys(props.auth).length === 0 &&
-      props.location.pathname !== '/login'
+      Object.keys(this.props.auth).length === 0 &&
+      this.props.location.pathname !== '/login' &&
+      this.props.location.pathname !== '/registro' &&
+      this.props.location.pathname !== '/recuperar'
     ) {
       props.history.push('/login')
-      console.log('-...')
     }
   }
 
