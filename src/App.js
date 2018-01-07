@@ -10,10 +10,25 @@ const { Content } = Layout
 
 class App extends Component {
   componentWillMount() {
-    const session = this.props.checkSession()
-    !session && this.props.history.push('/login')
+    Object.keys(this.props.auth).length === 0 &&
+      this.props.history.push('/login')
   }
+
+  componentWillUpdate(props) {
+    console.log('auth', this.props)
+    console.log('length', Object.keys(this.props.auth).length)
+    console.log('path', this.props.location.pathname)
+    if (
+      Object.keys(props.auth).length === 0 &&
+      props.location.pathname !== '/login'
+    ) {
+      props.history.push('/login')
+      console.log('-...')
+    }
+  }
+
   render() {
+    console.log(this.props.auth)
     return (
       <div>
         <Routes />
@@ -22,8 +37,8 @@ class App extends Component {
   }
 }
 
-function mapDispatchToProps({ general }) {
-  return { general }
+function mapDispatchToProps({ auth, general }) {
+  return { auth, general }
 }
 
 export default withRouter(connect(mapDispatchToProps, { checkSession })(App))

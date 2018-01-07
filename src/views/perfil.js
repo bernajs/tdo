@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { cerrarSesion } from '../actions/auth_acions'
 import { actualizarPerfil } from '../actions/perfil_actions'
 import { PerfilForm } from '../components'
-import { Col, Icon, Radio, Row, Tabs } from 'antd'
+import { Col, Divider, Icon, Radio, Row, Tabs } from 'antd'
 const { TabPane } = Tabs
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
 class Perfil extends Component {
+  // constructor(props) {
+  //   super(props)
+  //   this.cerrarSesion = this.cerrarSesion.bind(this)
+  // }
+
   componentWillMount() {
-    const usuario = JSON.parse(localStorage.getItem('user'))
+    const usuario = this.props.auth
     this.setState({ ...usuario })
   }
+
+  // cerrarSesion() {
+  //   this.props.cerrarSesion(this.props.history)
+  // }
+
   render() {
-    console.log(this.state)
     return (
       <div className="perfil-view">
         <Row type="flex" justify="center" />
@@ -35,6 +45,14 @@ class Perfil extends Component {
                       action={this.props.actualizarPerfil}
                       usuario={this.state}
                     />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <Divider />
+                  </Col>
+                  <Col span={24} className="center-text">
+                    <span onClick={this.props.cerrarSesion}>Cerrar sesión</span>
                   </Col>
                 </Row>
               </TabPane>
@@ -62,4 +80,10 @@ class Perfil extends Component {
   }
 }
 
-export default connect(null, { actualizarPerfil })(Perfil)
+function mapDispatchToProps({ auth }) {
+  return { auth }
+}
+
+export default connect(mapDispatchToProps, { actualizarPerfil, cerrarSesion })(
+  Perfil
+)

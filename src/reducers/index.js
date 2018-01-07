@@ -2,5 +2,6 @@ import categorias from './categorias_reducer'
 import productos from './productos_reducer'
 import general from './general_reducer'
 import carrito from './carrito_reducer'
+import auth from './auth_reducer'
 
-export default { carrito, categorias, general, productos }
+export default { auth, carrito, categorias, general, productos }

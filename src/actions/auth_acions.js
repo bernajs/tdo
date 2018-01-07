@@ -1,8 +1,8 @@
 import firebase from './firebase'
+import { CERRAR_SESION, INICIAR_SESION } from '../actions/types'
 
 export const checkSession = () => dispatch => {
   const user = JSON.parse(localStorage.getItem('user'))
-  console.log(user)
   return user ? user : false
 }
 
@@ -16,10 +16,14 @@ export const login = (correo, contrasena) => async dispatch => {
         .ref(`usuarios/${user.uid}`)
         .once('value')
         .then(function(snapShot) {
-          localStorage.setItem(
-            'user',
-            JSON.stringify({ ...snapShot.val(), uid: snapShot.key })
-          )
+          // localStorage.setItem(
+          //   'user',
+          //   JSON.stringify({ ...snapShot.val(), uid: snapShot.key })
+          // )
+          dispatch({
+            type: INICIAR_SESION,
+            payload: { ...snapShot.val(), uid: snapShot.key }
+          })
           return true
         })
     })
@@ -68,4 +72,9 @@ export const registro = usuario => async dispatch => {
       console.log(error)
       return error
     })
+}
+
+export const cerrarSesion = () => dispatch => {
+  // history.push('/login')
+  dispatch({ type: CERRAR_SESION })
 }

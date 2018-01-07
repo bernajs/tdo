@@ -1,8 +1,7 @@
 import firebase from './firebase'
+import { ACTUALIZAR_PERFIL } from './types'
 
 export const actualizarPerfil = usuario => dispatch => {
-  console.log('actualizando perfil')
-  console.log(usuario)
   const user = {
     uid: usuario.uid,
     nombre: usuario.nombre.value,
@@ -15,7 +14,8 @@ export const actualizarPerfil = usuario => dispatch => {
     .ref(`usuarios/${usuario.uid}`)
     .update(user)
     .then(result => {
-      localStorage.setItem('user', JSON.stringify(user))
+      // localStorage.setItem('user', JSON.stringify(user))
+      dispatch({ type: ACTUALIZAR_PERFIL, payload: user })
       return true
     })
     .catch(error => false)

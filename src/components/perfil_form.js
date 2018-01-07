@@ -36,6 +36,7 @@ class PerfilForm extends Component {
     this.props.usuario &&
       this.setState({
         uid: usuario.uid,
+        button: false,
         nombre: { value: usuario.nombre, label: '' },
         celular: { value: usuario.celular, label: '' },
         correo: { value: usuario.correo, label: '' },
@@ -47,13 +48,14 @@ class PerfilForm extends Component {
   async registro() {
     if (this.state.contrasena.value !== this.state.confirmar.value) {
       message.error('Las contraseñas no coinciden')
+      console.log(this.state)
       return
     }
     this.setState({ loading: true })
     const response = await this.props.action(this.state)
     this.setState({ loading: false })
     this.props.usuario
-      ? message.success('Perfil guardado')
+      ? message.success('Perfil actualizado')
       : this.props.history.push('/')
   }
 
@@ -73,8 +75,6 @@ class PerfilForm extends Component {
     name === 'celular' &&
       ((value = value.replace(/[^0-9\.]/g, '')),
       this.setState({ [name]: { value, label: '' } }))
-
-    const { correo, contrasena } = this.state
   }
 
   validateMail(email) {
@@ -83,7 +83,7 @@ class PerfilForm extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.state)
     return (
       <div className="registro">
         <Layout>
@@ -171,17 +171,10 @@ class PerfilForm extends Component {
                   type="primary"
                   loading={this.state.loading}
                   className="fw"
+                  disabled={this.state.button}
                 >
                   {this.props.titulo}
                 </Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={24}>
-                <Divider />
-              </Col>
-              <Col span={24} className="center-text">
-                Cerrar sesion
               </Col>
             </Row>
           </Content>
