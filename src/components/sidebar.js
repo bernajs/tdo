@@ -1,43 +1,81 @@
 import React from 'react'
-import { slide as Menu } from 'react-burger-menu'
+import { stack as Slider } from 'react-burger-menu'
 import { connect } from 'react-redux'
 import { getCategorias } from '../actions/categorias_actions'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { Icon, Menu } from 'antd'
+const { SubMenu } = Menu
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props)
     this.state = { isOpen: false }
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.stateChange = this.stateChange.bind(this)
   }
   componentDidMount() {
     this.props.getCategorias()
   }
 
   toggleMenu() {
+    console.log(this.state)
     this.setState({ isOpen: !this.state.isOpen })
+    console.log(this.state)
+  }
+
+  stateChange({ isOpen }) {
+    this.setState({ isOpen })
   }
 
   renderMenuItems() {
     return this.props.categorias.map(categoria => {
       return (
-        <NavLink
-          id={categoria.id}
-          key={categoria.id}
-          className="menu-item"
-          activeClassName="active"
-          exact
-          to={`/categoria/${categoria.id}`}
-          onClick={this.toggleMenu}
-        >
-          {categoria.name}
-        </NavLink>
+        <Menu.Item key={categoria.id}>
+          <NavLink
+            onClick={this.toggleMenu}
+            id={categoria.id}
+            className="menu-item"
+            activeClassName="active"
+            exact
+            to={`/categoria/${categoria.id}`}
+          >
+            {categoria.name}
+          </NavLink>
+        </Menu.Item>
       )
     })
   }
 
   render() {
-    return <Menu isOpen={this.state.isOpen}>{this.renderMenuItems()}</Menu>
+    console.log(this.state)
+    return (
+      <Slider
+        isOpen={this.state.isOpen}
+        onStateChange={this.stateChange}
+        pageWrapId={'page-wrap'}
+        outerContainerId={'outer-container'}
+        className="slider"
+      >
+        <Menu theme="dark" mode="inline">
+          <SubMenu
+            key="sub1"
+            title={
+              <span>
+                <Icon type="tags-o" />
+                <span>Categorías</span>
+              </span>
+            }
+          >
+            {this.renderMenuItems()}
+          </SubMenu>
+          <Menu.Item key="2">
+            <Link to="/perfil" onClick={this.toggleMenu}>
+              <Icon type="user" />Perfil
+            </Link>
+          </Menu.Item>
+        </Menu>
+      </Slider>
+    )
   }
 }
 

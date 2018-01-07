@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { actualizarPerfil } from '../actions/perfil_actions'
+import { PerfilForm } from '../components'
 import { Col, Icon, Radio, Row, Tabs } from 'antd'
 const { TabPane } = Tabs
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
-export default class Perfil extends Component {
+class Perfil extends Component {
+  componentWillMount() {
+    const usuario = JSON.parse(localStorage.getItem('user'))
+    this.setState({ ...usuario })
+  }
   render() {
+    console.log(this.state)
     return (
-      <div>
-        <Row type="flex" justify="center">
-          <Col span={21}>
-            <RadioGroup defaultValue="a">
-              <RadioButton value="a">Perfil</RadioButton>
-              <RadioButton value="b">Dirección</RadioButton>
-              <RadioButton value="d">Pedidos</RadioButton>
-            </RadioGroup>
-          </Col>
-        </Row>
+      <div className="perfil-view">
+        <Row type="flex" justify="center" />
         <Row>
           <Col span={24}>
             <Tabs>
@@ -27,7 +27,17 @@ export default class Perfil extends Component {
                   </span>
                 }
                 key="1"
-              />
+              >
+                <Row>
+                  <Col span={24}>
+                    <PerfilForm
+                      titulo="Guardar"
+                      action={this.props.actualizarPerfil}
+                      usuario={this.state}
+                    />
+                  </Col>
+                </Row>
+              </TabPane>
               <TabPane
                 tab={
                   <span>
@@ -51,3 +61,5 @@ export default class Perfil extends Component {
     )
   }
 }
+
+export default connect(null, { actualizarPerfil })(Perfil)

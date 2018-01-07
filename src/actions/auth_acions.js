@@ -11,12 +11,15 @@ export const login = (correo, contrasena) => async dispatch => {
     .auth()
     .signInWithEmailAndPassword(correo, contrasena)
     .then(function(user) {
-      let usuario = firebase
+      return firebase
         .database()
         .ref(`usuarios/${user.uid}`)
         .once('value')
         .then(function(snapShot) {
-          localStorage.setItem('user', JSON.stringify(snapShot.val()))
+          localStorage.setItem(
+            'user',
+            JSON.stringify({ ...snapShot.val(), uid: snapShot.key })
+          )
           return true
         })
     })

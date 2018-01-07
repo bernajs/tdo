@@ -10,7 +10,7 @@ const { Header, Content } = Layout
 class Main extends Component {
   render() {
     return (
-      <div>
+      <div id="outer-container">
         <Spin tip="Cargando..." spinning={this.props.general.isLoading}>
           <Layout style={{ minHeight: '100vh' }}>
             <Sidebar />
@@ -22,7 +22,7 @@ class Main extends Component {
                 closable
               />
             )}
-            <Layout>
+            <Layout id="page-wrap">
               <Header
                 style={{
                   background: '#fff',

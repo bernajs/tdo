@@ -27,6 +27,7 @@ class Login extends Component {
       this.state.correo.value,
       this.state.contrasena.value
     )
+    console.log(response)
     if (response) this.props.history.push('/')
     else {
       message.error('Usuario o contraseña incorrectos')
@@ -42,9 +43,10 @@ class Login extends Component {
       ? this.setState({ [name]: { value, label: 'error' }, button: true })
       : this.setState({ [name]: { value, label: '' }, button: false })
 
-    name === 'correo' && (!this.validateMail(value)
-      ? this.setState({ [name]: { value, label: 'error' }, button: true })
-      : this.setState({ [name]: { value, label: '' }, button: false }))
+    name === 'correo' &&
+      (!this.validateMail(value)
+        ? this.setState({ [name]: { value, label: 'error' }, button: true })
+        : this.setState({ [name]: { value, label: '' }, button: false }))
 
     const { correo, contrasena } = this.state
   }
