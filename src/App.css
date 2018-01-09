@@ -199,7 +199,7 @@
 }
 
 /* Registro */
-.registro .top-background {
+.top-background {
   position: fixed;
   right: 0;
   left: 0;
@@ -220,4 +220,15 @@
 /* Slider */
 .bm-menu .ant-menu-item {
   padding-left: 20px !important;
+}
+
+/* Login view */
+.login .facebook-login--btn {
+  background-color: #3b5998;
+  color: white;
+}
+
+.login .google-login--btn {
+  background-color: #dd4b39;
+  color: white;
 }

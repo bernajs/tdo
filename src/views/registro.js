@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { PerfilForm } from '../components'
 import { registro } from '../actions/auth_acions'
-import { Button, Col, Form, Icon, Input, Layout, message, Row } from 'antd'
-const { Item } = Form
+import { Col, Layout, Row } from 'antd'
 const { Content } = Layout
 
 class Registro extends Component {

@@ -2,9 +2,17 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../actions/auth_acions'
-import { message } from 'antd'
-
-import { Button, Col, Form, Icon, Input, Layout, Row } from 'antd'
+import {
+  Button,
+  Col,
+  Divider,
+  Form,
+  Icon,
+  Input,
+  Layout,
+  message,
+  Row
+} from 'antd'
 const { Item } = Form
 const { Content } = Layout
 
@@ -47,8 +55,6 @@ class Login extends Component {
       (!this.validateMail(value)
         ? this.setState({ [name]: { value, label: 'error' }, button: true })
         : this.setState({ [name]: { value, label: '' }, button: false }))
-
-    const { correo, contrasena } = this.state
   }
 
   validateMail(email) {
@@ -57,9 +63,8 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
-      <div className="registro">
+      <div className="login">
         <div className="top-background" />
         <Layout>
           <Content style={{ padding: 24, background: '#fff', minHeight: 360 }}>
@@ -109,6 +114,22 @@ class Login extends Component {
                 >
                   Iniciar sesión
                 </Button>
+              </Col>
+              <Col span={24} className="mt-20">
+                <Row type="flex" justify="space-between">
+                  <Col span={24}>
+                    <Divider>ó</Divider>
+                  </Col>
+                  <Col span={11}>
+                    <Button
+                      icon="facebook"
+                      className="facebook-login--btn fw"
+                    />
+                  </Col>
+                  <Col span={11}>
+                    <Button icon="google" className="google-login--btn fw" />
+                  </Col>
+                </Row>
               </Col>
               <Col
                 span={24}

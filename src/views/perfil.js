@@ -3,25 +3,14 @@ import { connect } from 'react-redux'
 import { cerrarSesion } from '../actions/auth_acions'
 import { actualizarPerfil } from '../actions/perfil_actions'
 import { PerfilForm } from '../components'
-import { Col, Divider, Icon, Radio, Row, Tabs } from 'antd'
+import { Col, Divider, Icon, Row, Tabs } from 'antd'
 const { TabPane } = Tabs
-const RadioButton = Radio.Button
-const RadioGroup = Radio.Group
 
 class Perfil extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.cerrarSesion = this.cerrarSesion.bind(this)
-  // }
-
   componentWillMount() {
     const usuario = this.props.auth
     this.setState({ ...usuario })
   }
-
-  // cerrarSesion() {
-  //   this.props.cerrarSesion(this.props.history)
-  // }
 
   render() {
     return (

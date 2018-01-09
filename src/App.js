@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import './App.css'
 import { Routes } from './router'
-import { Link, withRouter } from 'react-router-dom'
-import { Sidebar, Carrito, HeaderBar } from './components'
+import { withRouter } from 'react-router-dom'
 import { checkSession } from './actions/auth_acions'
 import { connect } from 'react-redux'
-import { Alert, Layout, Spin } from 'antd'
-const { Content } = Layout
 
 class App extends Component {
   componentWillMount() {
@@ -15,20 +12,17 @@ class App extends Component {
   }
 
   componentWillUpdate(props) {
-    console.log('auth', this.props)
-
     if (
-      Object.keys(this.props.auth).length === 0 &&
-      this.props.location.pathname !== '/login' &&
-      this.props.location.pathname !== '/registro' &&
-      this.props.location.pathname !== '/recuperar'
+      Object.keys(props.auth).length === 0 &&
+      props.location.pathname !== '/login' &&
+      props.location.pathname !== '/registro' &&
+      props.location.pathname !== '/recuperar'
     ) {
       props.history.push('/login')
     }
   }
 
   render() {
-    console.log(this.props.auth)
     return (
       <div>
         <Routes />
@@ -37,8 +31,8 @@ class App extends Component {
   }
 }
 
-function mapDispatchToProps({ auth, general }) {
-  return { auth, general }
+function mapDispatchToProps({ auth }) {
+  return { auth }
 }
 
 export default withRouter(connect(mapDispatchToProps, { checkSession })(App))

@@ -1,17 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Icon,
-  Input,
-  Layout,
-  message,
-  Row
-} from 'antd'
+import { Button, Col, Form, Icon, Input, Layout, message, Row } from 'antd'
 const { Item } = Form
 const { Content } = Layout
 
@@ -52,7 +41,7 @@ class PerfilForm extends Component {
       return
     }
     this.setState({ loading: true })
-    const response = await this.props.action(this.state)
+    await this.props.action(this.state)
     this.setState({ loading: false })
     this.props.usuario
       ? message.success('Perfil actualizado')
@@ -83,7 +72,6 @@ class PerfilForm extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="registro">
         <Layout>
