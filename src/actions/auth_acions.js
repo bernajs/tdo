@@ -32,8 +32,41 @@ export const login = (correo, contrasena) => async dispatch => {
     })
 }
 
+export const facebookLogin = () => async dispatch => {
+  const provider = new firebase.auth.FacebookAuthProvider()
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken
+      // The signed-in user info.
+      var user = result.user
+      console.log(result)
+      // ...
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      console.log(error)
+      var errorCode = error.code
+      var errorMessage = error.message
+      // The email of the user's account used.
+      var email = error.email
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential
+      // ...
+    })
+}
+
 export const registro = usuario => async dispatch => {
-  const response = firebase
+  const usr = {
+    nombre: usuario.nombre.value,
+    celular: usuario.celular.value,
+    correo: usuario.correo.value,
+    contrasena: usuario.contrasena.value,
+    direccion: null
+  }
+  return firebase
     .auth()
     .createUserWithEmailAndPassword(
       usuario.correo.value,
@@ -45,13 +78,7 @@ export const registro = usuario => async dispatch => {
       firebase
         .database()
         .ref(`usuarios/${user.uid}`)
-        .set({
-          nombre: usuario.nombre.value,
-          celular: usuario.celular.value,
-          correo: usuario.correo.value,
-          contrasena: usuario.contrasena.value,
-          direccion: null
-        })
+        .set(usr)
       user
         .updateProfile({
           displayName: usuario.nombre.value
@@ -60,8 +87,14 @@ export const registro = usuario => async dispatch => {
           function() {
             // Update successful.
             console.log('se actualizó el nombre')
+            dispatch({
+              type: INICIAR_SESION,
+              payload: { ...usr, uid: user.uid }
+            })
+            return true
           },
           function(error) {
+            return false
             console.log('ocurrio un error actualizando el nombre')
             // An error happened.
           }

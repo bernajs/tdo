@@ -83,7 +83,10 @@ class Carrito extends Component {
       line_items: productos
     }
     this.setState({ status: 'loading' })
-    const result = await this.props.enviarPedido(pedido)
+    const result = await this.props.enviarPedido({
+      uid: this.props.auth.uid,
+      pedido
+    })
     if (result) {
       const body = JSON.parse(result.body)
       this.setState({ status: 'check-circle' })
@@ -188,8 +191,8 @@ class Carrito extends Component {
   }
 }
 
-function mapDispatchToProps({ carrito }) {
-  return { carrito }
+function mapDispatchToProps({ auth, carrito }) {
+  return { auth, carrito }
 }
 
 export default connect(mapDispatchToProps, { enviarPedido, vaciarCarrito })(

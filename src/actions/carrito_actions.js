@@ -7,6 +7,7 @@ import {
 } from './types'
 import { PURGE } from 'redux-persist'
 import WooCommerce from './woocommerce'
+import firebase from './firebase'
 
 export const agregarProducto = producto => dispatch => {
   dispatch({ type: AGREGAR_PRODUCTO, payload: producto })
@@ -32,7 +33,17 @@ export const purgeCarrito = () => dispatch => {
   dispatch({ type: PURGE })
 }
 
-export const enviarPedido = pedido => async dispatch => {
-  const result = await WooCommerce.postAsync('orders', pedido)
-  return result
+export const enviarPedido = data => async dispatch => {
+  const result = await WooCommerce.postAsync('orders', data.pedido)
+  console.log(data)
+  const { id } = JSON.parse(result.toJSON().body)
+  console.log(result)
+  console.log(id)
+  return firebase
+    .database()
+    .ref(`pedidos/${data.uid}`)
+    .push({
+      id_pedido: id
+    })
+    .then(response => result)
 }

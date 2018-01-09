@@ -5,10 +5,12 @@ import Carrito from './carrito'
 import CarritoItem from './carrito_item'
 import HeaderBar from './header'
 import PerfilForm from './perfil_form'
+import DireccionForm from './direccion_form'
 
 export {
   Carrito,
   CarritoItem,
+  DireccionForm,
   HeaderBar,
   LoadingCard,
   Sidebar,

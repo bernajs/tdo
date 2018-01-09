@@ -7,8 +7,13 @@ import { connect } from 'react-redux'
 
 class App extends Component {
   componentWillMount() {
-    Object.keys(this.props.auth).length === 0 &&
-      this.props.history.push('/login')
+    Object.keys(this.props.auth).length === 0
+      ? this.props.history.push('/login')
+      : (this.props.location.pathname === '/login' ||
+          this.props.location.pathname === '/registro' ||
+          this.props.location.pathname === '/recuperar') &&
+        (console.log('redirigiendo'),
+        Object.keys(this.props.auth).length > 0 && this.props.history.push('/'))
   }
 
   componentWillUpdate(props) {
@@ -19,6 +24,13 @@ class App extends Component {
       props.location.pathname !== '/recuperar'
     ) {
       props.history.push('/login')
+    } else if (
+      props.location.pathname === '/login' ||
+      props.location.pathname === '/registro' ||
+      props.location.pathname === '/recuperar'
+    ) {
+      console.log('redirigiendo')
+      Object.keys(props.auth).length > 0 && props.history.push('/')
     }
   }
 

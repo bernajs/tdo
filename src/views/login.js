@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { login } from '../actions/auth_acions'
+import { facebookLogin, login } from '../actions/auth_acions'
 import {
   Button,
   Col,
@@ -122,6 +122,7 @@ class Login extends Component {
                   </Col>
                   <Col span={11}>
                     <Button
+                      onClick={this.props.facebookLogin}
                       icon="facebook"
                       className="facebook-login--btn fw"
                     />
@@ -149,4 +150,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { login })(Login)
+export default connect(null, { facebookLogin, login })(Login)

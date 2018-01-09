@@ -1,48 +1,49 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { actualizarDireccion, getDireccion } from '../actions/perfil_actions'
 import { Button, Col, Form, Icon, Input, Layout, message, Row } from 'antd'
 const { Item } = Form
 const { Content } = Layout
 
-class PerfilForm extends Component {
+class DireccionForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      nombre: { value: '', label: '' },
-      celular: { value: '', label: '' },
-      correo: { value: '', label: '' },
-      confirmar: { value: '', label: '' },
-      contrasena: { value: '', label: '' },
+      calle: { value: '', label: '' },
+      numero: { value: '', label: '' },
+      colonia: { value: '', label: '' },
+      ciudad: { value: '', label: '' },
+      estado: { value: '', label: '' },
+      cp: { value: '', label: '' },
       loading: false,
       button: true
     }
-    this.registro = this.registro.bind(this)
+    this.actualizarDireccion = this.actualizarDireccion.bind(this)
     this.handleInput = this.handleInput.bind(this)
   }
 
-  componentWillMount() {
-    const { usuario } = this.props
-    this.props.usuario &&
-      this.setState({
-        uid: usuario.uid,
-        button: false,
-        nombre: { value: usuario.nombre, label: '' },
-        celular: { value: usuario.celular, label: '' },
-        correo: { value: usuario.correo, label: '' },
-        confirmar: { value: usuario.contrasena, label: '' },
-        contrasena: { value: usuario.contrasena, label: '' }
-      })
+  componentDidMount() {
+    this.props.getDireccion(this.props.uid)
+    this.setState({ uid: this.props.uid })
   }
 
-  async registro() {
-    if (this.state.contrasena.value !== this.state.confirmar.value) {
-      message.error('Las contraseñas no coinciden')
-      console.log(this.state)
-      return
-    }
+  componentWillReceiveProps(props) {
+    const { direccion } = props
+    console.log(props)
+    console.log(this.props)
+    this.setState({
+      calle: { value: direccion.calle, label: '' },
+      numero: { value: direccion.numero, label: '' },
+      colonia: { value: direccion.colonia, label: '' },
+      ciudad: { value: direccion.ciudad, label: '' },
+      cp: { value: direccion.cp, label: '' },
+      estado: { value: direccion.estado, label: '' }
+    })
+  }
+
+  async actualizarDireccion() {
     this.setState({ loading: true })
-    const response = await this.props.action(this.state)
+    const response = await this.props.actualizarDireccion(this.state)
     this.setState({ loading: false })
     console.log(response)
     console.log(this.props)
@@ -79,17 +80,17 @@ class PerfilForm extends Component {
   render() {
     console.log(this.props)
     return (
-      <div className="registro">
+      <div className="actualizarDireccion">
         <Layout>
           <Content style={{ background: '#fff' }}>
             <Row>
               <Col span={24}>
                 <Form>
-                  <Item validateStatus={this.state.nombre.label}>
+                  <Item validateStatus={this.state.calle.label}>
                     <Input
-                      placeholder="Nombre completo"
-                      value={this.state.nombre.value}
-                      name="nombre"
+                      placeholder="Calle"
+                      value={this.state.calle.value}
+                      name="calle"
                       onChange={this.handleInput}
                       prefix={
                         <Icon
@@ -99,11 +100,11 @@ class PerfilForm extends Component {
                       }
                     />
                   </Item>
-                  <Item validateStatus={this.state.celular.label}>
+                  <Item validateStatus={this.state.numero.label}>
                     <Input
-                      placeholder="Celular"
-                      name="celular"
-                      value={this.state.celular.value}
+                      placeholder="Número"
+                      name="numero"
+                      value={this.state.numero.value}
                       onChange={this.handleInput}
                       prefix={
                         <Icon
@@ -113,11 +114,11 @@ class PerfilForm extends Component {
                       }
                     />
                   </Item>
-                  <Item validateStatus={this.state.correo.label}>
+                  <Item validateStatus={this.state.colonia.label}>
                     <Input
-                      placeholder="Correo"
-                      value={this.state.correo.value}
-                      name="correo"
+                      placeholder="Colonia"
+                      value={this.state.colonia.value}
+                      name="colonia"
                       onChange={this.handleInput}
                       prefix={
                         <Icon
@@ -127,12 +128,11 @@ class PerfilForm extends Component {
                       }
                     />
                   </Item>
-                  <Item validateStatus={this.state.contrasena.label}>
+                  <Item validateStatus={this.state.ciudad.label}>
                     <Input
-                      placeholder="Contraseña"
-                      value={this.state.contrasena.value}
-                      name="contrasena"
-                      type="password"
+                      placeholder="Ciudad"
+                      value={this.state.ciudad.value}
+                      name="ciudad"
                       onChange={this.handleInput}
                       prefix={
                         <Icon
@@ -142,12 +142,25 @@ class PerfilForm extends Component {
                       }
                     />
                   </Item>
-                  <Item validateStatus={this.state.confirmar.label}>
+                  <Item validateStatus={this.state.estado.label}>
                     <Input
-                      placeholder="Confirmar contraseña"
-                      value={this.state.confirmar.value}
-                      name="confirmar"
-                      type="password"
+                      placeholder="Estado"
+                      value={this.state.estado.value}
+                      name="estado"
+                      onChange={this.handleInput}
+                      prefix={
+                        <Icon
+                          type="lock"
+                          style={{ color: 'rgba(0,0,0,.25)' }}
+                        />
+                      }
+                    />
+                  </Item>
+                  <Item validateStatus={this.state.cp.label}>
+                    <Input
+                      placeholder="Código postal"
+                      value={this.state.cp.value}
+                      name="cp"
                       onChange={this.handleInput}
                       prefix={
                         <Icon
@@ -161,13 +174,13 @@ class PerfilForm extends Component {
               </Col>
               <Col span={24}>
                 <Button
-                  onClick={this.registro}
+                  onClick={this.actualizarDireccion}
                   type="primary"
                   loading={this.state.loading}
                   className="fw"
                   disabled={this.state.button}
                 >
-                  {this.props.titulo}
+                  Guardar dirección
                 </Button>
               </Col>
             </Row>
@@ -178,4 +191,11 @@ class PerfilForm extends Component {
   }
 }
 
-export default withRouter(connect(null)(PerfilForm))
+function mapDispatchToProps({ direccion }) {
+  return { direccion }
+}
+
+export default connect(mapDispatchToProps, {
+  actualizarDireccion,
+  getDireccion
+})(DireccionForm)

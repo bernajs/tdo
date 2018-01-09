@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { cerrarSesion } from '../actions/auth_acions'
 import { actualizarPerfil } from '../actions/perfil_actions'
-import { PerfilForm } from '../components'
+import { DireccionForm, PerfilForm } from '../components'
 import { Col, Divider, Icon, Row, Tabs } from 'antd'
 const { TabPane } = Tabs
 
@@ -13,6 +13,7 @@ class Perfil extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="perfil-view">
         <Row type="flex" justify="center" />
@@ -52,7 +53,9 @@ class Perfil extends Component {
                   </span>
                 }
                 key="2"
-              />
+              >
+                <DireccionForm uid={this.props.auth.uid} />
+              </TabPane>
               <TabPane
                 tab={
                   <span>

@@ -18,7 +18,11 @@ class Registro extends Component {
                 <h2>Registro</h2>
               </Col>
               <Col span={24}>
-                <PerfilForm titulo="Registrarme" action={this.props.registro} />
+                <PerfilForm
+                  titulo="Registrarme"
+                  action={this.props.registro}
+                  usuario={null}
+                />
               </Col>
               <Col
                 span={24}

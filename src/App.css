@@ -26,7 +26,7 @@
 }
 .carrito-icon {
   float: left;
-  margin-left: 10px;
+  margin-left: -15px;
 }
 .bm-burger-button {
   position: fixed;
