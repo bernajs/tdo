@@ -48,8 +48,8 @@ class DireccionForm extends Component {
     console.log(response)
     console.log(this.props)
     if (response) {
-      this.props.titulo !== 'Registrarme'
-        ? message.success('Perfil actualizado')
+      this.props.mensaje
+        ? message.success(this.props.mensaje)
         : this.props.history.push('/')
     }
   }

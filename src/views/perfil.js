@@ -53,7 +53,7 @@ class Perfil extends Component {
                 }
                 key="2"
               >
-                <DireccionForm uid={this.props.auth.uid} />
+                <DireccionForm uid={this.props.auth.uid} mensaje="Dirección actualizada" />
               </TabPane>
               <TabPane
                 tab={

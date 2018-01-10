@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Form, Icon, Input, Layout, message, Row, Col } from 'antd'
-import { CarritoItem } from '../components'
+import { CarritoItem, DireccionForm } from '../components'
 import { enviarPedido, vaciarCarrito } from '../actions/carrito_actions'
 const { Footer } = Layout
 
@@ -91,8 +91,8 @@ class Carrito extends Component {
       const body = JSON.parse(result.body)
       this.setState({ status: 'check-circle' })
       this.props.vaciarCarrito()
-      message.success(`Tu pedido se ha creado con el id #${body.id}`, 10, () =>
-        console.log('cerrado')
+      message.success(`Tu pedido se ha creado con el id #${body.id}`, 2, () =>
+        this.props.history.push(`/pedido/${body.id}`)
       )
     }
   }
@@ -124,7 +124,7 @@ class Carrito extends Component {
 
   siguiente() {
     let { paso } = this.state
-    paso < 2 && this.setState({ paso: paso + 1 })
+    paso < 1 && this.setState({ paso: paso + 1 })
   }
 
   atras() {
@@ -139,11 +139,11 @@ class Carrito extends Component {
           <div className="carrito-container">
             {this.state.paso === 0 && this.renderProductos()}
             {this.state.paso === 1 && (
-              <div>Aqui va la información del billing</div>
-            )}
-            {this.state.paso === 2 && (
               <div>
-                <Form>{this.renderUsuarioInfo()}</Form>
+                <DireccionForm
+                  uid={this.props.auth.uid}
+                  mensaje="Dirección actualizada"
+                />
               </div>
             )}
           </div>
@@ -162,7 +162,7 @@ class Carrito extends Component {
                   >
                     <Icon type="left" />Atrás
                   </Button>
-                  {this.state.paso < 2 ? (
+                  {this.state.paso < 1 ? (
                     <Button
                       onClick={this.siguiente}
                       type="primary"
