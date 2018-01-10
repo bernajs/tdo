@@ -7,5 +7,17 @@ import Main from './app'
 import Carrito from './carrito'
 import Perfil from './perfil'
 import Registro from './registro'
+import Pedido from './pedido'
 
-export { Carrito, Categoria, Categorias, Inicio, Main, Login, Perfil, Registro, Producto }
+export {
+  Carrito,
+  Categoria,
+  Categorias,
+  Inicio,
+  Main,
+  Login,
+  Perfil,
+  Registro,
+  Pedido,
+  Producto
+}

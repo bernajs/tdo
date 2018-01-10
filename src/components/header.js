@@ -16,9 +16,9 @@ export default class HeaderBar extends Component {
         <Sidebar />
         <Carrito className="header-carrito" />
         <Link to="/">
-          <h2 style={{ display: 'inline', textAlign: 'center' }}>
+          <h1 style={{ display: 'inline', textAlign: 'center' }}>
             TDO - Tienda
-          </h2>
+          </h1>
         </Link>
       </Layout.Header>
     )

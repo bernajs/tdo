@@ -8,6 +8,7 @@ import {
   Login,
   Main,
   Perfil,
+  Pedido,
   Producto,
   Registro
 } from '../views'
@@ -21,6 +22,7 @@ export const Aplicacion = () => {
         <Route path="/categorias" component={Categorias} />
         <Route path="/carrito" component={Carrito} />
         <Route path="/perfil" component={Perfil} />
+        <Route path="/pedido/:id" component={Pedido} />
         <Route path="/" component={Inicio} />
       </Switch>
     </div>

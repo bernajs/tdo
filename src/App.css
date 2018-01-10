@@ -232,3 +232,16 @@
   background-color: #dd4b39;
   color: white;
 }
+
+/* Pedido list */
+.pedido-list .pedido-item {
+  background-color: #2980b9;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  /* font-size: 20px; */
+  /* margin-top: 10px; */
+  border-radius: 50px;
+  padding: 15px;
+  /* margin-top: 12px; */
+}
