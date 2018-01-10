@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { PerfilForm } from '../components'
 import { getPedido } from '../actions/pedido_actions'
-import { Col, Divider, Icon, Layout, List, Row } from 'antd'
-const { Content } = Layout
+import { Col, Divider, Icon, List, Row } from 'antd'
 
 class Pedido extends Component {
   constructor(props) {

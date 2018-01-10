@@ -38,23 +38,11 @@ export const facebookLogin = () => async dispatch => {
     .auth()
     .signInWithPopup(provider)
     .then(function(result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      var token = result.credential.accessToken
-      // The signed-in user info.
-      var user = result.user
       console.log(result)
-      // ...
     })
     .catch(function(error) {
       // Handle Errors here.
       console.log(error)
-      var errorCode = error.code
-      var errorMessage = error.message
-      // The email of the user's account used.
-      var email = error.email
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential
-      // ...
     })
 }
 
@@ -95,7 +83,6 @@ export const registro = usuario => async dispatch => {
           },
           function(error) {
             return false
-            console.log('ocurrio un error actualizando el nombre')
             // An error happened.
           }
         )
@@ -108,6 +95,5 @@ export const registro = usuario => async dispatch => {
 }
 
 export const cerrarSesion = () => dispatch => {
-  // history.push('/login')
   dispatch({ type: CERRAR_SESION })
 }

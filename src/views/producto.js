@@ -53,8 +53,8 @@ class Producto extends Component {
     return this.props.variaciones.map((producto, key) => {
       if (producto.attributes.length > 0) {
         let varianteText = ''
-        producto.attributes.map((variacion, key) => {
-          varianteText += `${variacion.name}: ${variacion.option} `
+        varianteText += producto.attributes.map((variacion, key) => {
+          return `${variacion.name}: ${variacion.option} `
         })
         return (
           <Tag color="#108ee9" key={key}>

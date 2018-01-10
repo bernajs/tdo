@@ -12,8 +12,8 @@ class App extends Component {
       : (this.props.location.pathname === '/login' ||
           this.props.location.pathname === '/registro' ||
           this.props.location.pathname === '/recuperar') &&
-        (console.log('redirigiendo'),
-        Object.keys(this.props.auth).length > 0 && this.props.history.push('/'))
+        (Object.keys(this.props.auth).length > 0 &&
+          this.props.history.push('/'))
   }
 
   componentWillUpdate(props) {

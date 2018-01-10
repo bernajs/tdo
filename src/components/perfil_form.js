@@ -66,14 +66,15 @@ class PerfilForm extends Component {
         ? this.setState({ [name]: { value, label: 'error' }, button: true })
         : this.setState({ [name]: { value, label: '' }, button: false }))
 
-    name === 'celular' &&
-      ((value = value.replace(/[^0-9\.]/g, '')),
-      this.setState({ [name]: { value, label: '' } }))
+    if (name === 'celular') {
+      value = value.replace(/[^0-9]/g, '')
+      this.setState({ [name]: { value, label: '' } })
+    }
   }
 
   validateMail(email) {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    return re.test(email.toLowerCase())
+    var re = /\S+@\S+\.\S+/
+    return re.test(email)
   }
 
   render() {

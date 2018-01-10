@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import gradient from 'random-gradient'
-import { Avatar, Button, Col, Icon, List, Row } from 'antd'
+import { Col, Icon, List, Row } from 'antd'
 import { connect } from 'react-redux'
 import { getPedidos } from '../actions/pedido_actions'
 
@@ -17,8 +16,6 @@ class PedidoList extends Component {
 
   renderPedidos() {
     return this.props.pedido.data.map(pedido => {
-      // const bgGradient = { background: gradient('radial') }
-      // console.log(bgGradient)
       return (
         <List.Item key={pedido.id}>
           <Link to={`pedido/${pedido.id}`} className="fw">
